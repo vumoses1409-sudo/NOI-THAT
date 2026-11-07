@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMIÈRE — Nội Thất Sang Trọng</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#c9a961;
+    --gold-light:#e0c98a;
+    --dark:#14110e;
+    --dark-2:#1d1915;
+    --cream:#f6f2ea;
+    --muted:#8a8175;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Jost',sans-serif;
+    background:var(--cream);
+    color:var(--dark);
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--dark)}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:26px 6vw;
+    transition:all .5s ease;
+  }
+  nav.scrolled{
+    background:rgba(20,17,14,.92);
+    backdrop-filter:blur(14px);
+    padding:16px 6vw;
+    box-shadow:0 4px 30px rgba(0,0,0,.25);
+  }
+  .logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.9rem;font-weight:600;
+    letter-spacing:.28em;
+    color:#fff;
+    text-shadow:0 2px 20px rgba(0,0,0,.5);
+  }
+  nav.scrolled .logo{color:var(--gold-light);text-shadow:none}
+  .nav-links{display:flex;gap:38px;align-items:center}
+  .nav-links a{
+    color:#fff;text-decoration:none;
+    font-size:.82rem;letter-spacing:.18em;
+    text-transform:uppercase;font-weight:400;
+    position:relative;padding:4px 0;
+    transition:color .3s;
+    text-shadow:0 1px 10px rgba(0,0,0,.6);
+  }
+  nav.scrolled .nav-links a{color:var(--cream);text-shadow:none}
+  .nav-links a::after{
+    content:'';position:absolute;bottom:0;left:0;
+    width:0;height:1px;background:var(--gold);
+    transition:width .4s ease;
+  }
+  .nav-links a:hover::after{width:100%}
+  .nav-links a:hover{color:var(--gold-light)}
+  .nav-cta{
+    border:1px solid var(--gold);
+    padding:11px 26px !important;
+    color:var(--gold-light) !important;
+    transition:all .4s ease !important;
+  }
+  .nav-cta:hover{
+    background:var(--gold);color:var(--dark) !important;
+  }
+  .nav-cta::after{display:none}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+  .burger span{width:26px;height:1.5px;background:#fff;transition:.3s}
+  nav.scrolled .burger span{background:var(--gold-light)}
+
+  /* HERO */
+  .hero{
+    position:relative;height:100vh;min-height:640px;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=85') center/cover;
+    animation:slowZoom 22s ease-in-out infinite alternate;
+  }
+  @keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.12)}}
+  .hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(20,17,14,.55) 0%,rgba(20,17,14,.35) 45%,rgba(20,17,14,.82) 100%);
+  }
+  .hero-content{
+    position:relative;text-align:center;color:#fff;
+    padding:0 5vw;max-width:1000px;
+    animation:fadeUp 1.4s ease .2s both;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+  .hero-tag{
+    display:inline-block;
+    font-size:.75rem;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--gold-light);
+    margin-bottom:28px;
+    padding-bottom:14px;
+    border-bottom:1px solid rgba(201,169,97,.5);
+  }
+  .hero h1{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:400;
+    font-size:clamp(2.6rem,7vw,5.6rem);
+    line-height:1.06;
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  .hero h1 em{
+    font-style:italic;color:var(--gold-light);
+    font-weight:300;
+  }
+  .hero p{
+    font-size:clamp(.95rem,1.5vw,1.15rem);
+    font-weight:300;letter-spacing:.06em;
+    color:rgba(255,255,255,.82);
+    max-width:560px;margin:0 auto 44px;line-height:1.8;
+  }
+  .btn-group{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-block;
+    padding:16px 42px;
+    font-size:.78rem;letter-spacing:.22em;
+    text-transform:uppercase;text-decoration:none;
+    font-weight:500;cursor:pointer;border:none;
+    transition:all .45s cubic-bezier(.2,.8,.2,1);
+    font-family:'Jost',sans-serif;
+  }
+  .btn-gold{
+    background:var(--gold);color:var(--dark);
+  }
+  .btn-gold:hover{
+    background:var(--gold-light);
+    transform:translateY(-3px);
+    box-shadow:0 14px 34px rgba(201,169,97,.4);
+  }
+  .btn-ghost{
+    background:transparent;color:#fff;
+    border:1px solid rgba(255,255,255,.55);
+  }
+  .btn-ghost:hover{
+    border-color:var(--gold);color:var(--gold-light);
+    transform:translateY(-3px);
+  }
+  .scroll-hint{
+    position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    color:rgba(255,255,255,.7);
+    font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+    animation:fadeUp 1.6s ease 1s both;
+  }
+  .scroll-hint .line{
+    width:1px;height:56px;
+    background:linear-gradient(to bottom,var(--gold),transparent);
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:.4;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* SECTION COMMON */
+  section{padding:130px 6vw}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 80px}
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.4em;
+    text-transform:uppercase;color:var(--gold);
+    margin-bottom:22px;font-weight:500;
+  }
+  .section-head h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2rem,4.6vw,3.4rem);
+    font-weight:500;line-height:1.2;
+    color:var(--dark);
+  }
+  .section-head p{
+    margin-top:22px;color:var(--muted);
+    font-weight:300;line-height:1.9;font-size:1.02rem;
+  }
+  .reveal{opacity:0;transform:translateY(50px);transition:all 1s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* ABOUT */
+  .about{background:var(--cream)}
+  .about-grid{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:90px;align-items:center;max-width:1280px;margin:0 auto;
+  }
+  .about-imgs{position:relative}
+  .about-imgs img{
+    width:100%;display:block;
+    object-fit:cover;
+  }
+  .about-main{
+    height:560px;
+    box-shadow:0 40px 80px -30px rgba(20,17,14,.35);
+  }
+  .about-sub{
+    position:absolute;bottom:-50px;right:-40px;
+    width:52%;height:280px;
+    border:10px solid var(--cream);
+    box-shadow:0 30px 60px -20px rgba(20,17,14,.3);
+  }
+  .about-text{padding-left:10px}
+  .about-text h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2rem,3.6vw,2.9rem);
+    font-weight:500;line-height:1.2;margin-bottom:28px;
+  }
+  .about-text p{
+    color:#5d564c;line-height:1.95;font-weight:300;
+    margin-bottom:20px;font-size:1rem;
+  }
+  .stats{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:24px;margin-top:44px;padding-top:38px;
+    border-top:1px solid rgba(20,17,14,.12);
+  }
+  .stat h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:2.5rem;font-weight:600;color:var(--gold);
+    line-height:1;
+  }
+  .stat span{
+    display:block;margin-top:10px;
+    font-size:.72rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);
+  }
+
+  /* SERVICES */
+  .services{background:var(--dark);color:var(--cream);position:relative}
+  .services .section-head h2{color:#fff}
+  .services .section-head p{color:rgba(246,242,234,.62)}
+  .svc-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:2px;max-width:1280px;margin:0 auto;
+    background:rgba(201,169,97,.16);
+  }
+  .svc{
+    background:var(--dark);
+    padding:52px 34px;
+    transition:all .5s ease;
+    position:relative;overflow:hidden;
+  }
+  .svc::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(160deg,rgba(201,169,97,.14),transparent);
+    opacity:0;transition:opacity .5s;
+  }
+  .svc:hover::before{opacity:1}
+  .svc:hover{transform:translateY(-6px)}
+  .svc-num{
+    font-family:'Cormorant Garamond',serif;
+    font-size:.95rem;color:var(--gold);
+    letter-spacing:.2em;margin-bottom:26px;
+  }
+  .svc h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.55rem;font-weight:500;
+    margin-bottom:16px;color:#fff;
+  }
+  .svc p{
+    font-size:.9rem;line-height:1.85;
+    font-weight:300;color:rgba(246,242,234,.6);
+  }
+  .svc-icon{
+    font-size:1.7rem;margin-bottom:22px;color:var(--gold);
+  }
+
+  /* GALLERY */
+  .gallery{background:var(--cream)}
+  .gal-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:220px;
+    gap:16px;max-width:1300px;margin:0 auto;
+  }
+  .gal-item{
+    position:relative;overflow:hidden;cursor:pointer;
+  }
+  .gal-item img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform 1s cubic-bezier(.2,.8,.2,1);
+  }
+  .gal-item:hover img{transform:scale(1.1)}
+  .gal-item::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(20,17,14,.65),transparent 55%);
+    opacity:0;transition:opacity .5s;
+  }
+  .gal-item:hover::after{opacity:1}
+  .gal-cap{
+    position:absolute;bottom:22px;left:24px;
+    color:#fff;z-index:2;opacity:0;
+    transform:translateY(14px);
+    transition:all .5s ease .1s;
+  }
+  .gal-item:hover .gal-cap{opacity:1;transform:translateY(0)}
+  .gal-cap span{
+    display:block;font-size:.68rem;
+    letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold-light);margin-bottom:6px;
+  }
+  .gal-cap strong{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.35rem;font-weight:500;
+  }
+  .gal-tall{grid-row:span 2}
+  .gal-wide{grid-column:span 2}
+
+  /* PROCESS */
+  .process{background:var(--dark-2);color:var(--cream)}
+  .process .section-head h2{color:#fff}
+  .steps{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:50px;max-width:1200px;margin:0 auto;position:relative;
+  }
+  .steps::before{
+    content:'';position:absolute;top:36px;left:10%;right:10%;
+    height:1px;
+    background:repeating-linear-gradient(to right,rgba(201,169,97,.5) 0 8px,transparent 8px 18px);
+  }
+  .step{text-align:center;position:relative}
+  .step-num{
+    width:72px;height:72px;border-radius:50%;
+    border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 26px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.5rem;color:var(--gold);
+    background:var(--dark-2);
+    position:relative;z-index:2;
+    transition:all .4s;
+  }
+  .step:hover .step-num{
+    background:var(--gold);color:var(--dark);
+    box-shadow:0 0 34px rgba(201,169,97,.5);
+  }
+  .step h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.3rem;font-weight:500;
+    margin-bottom:12px;color:#fff;
+  }
+  .step p{
+    font-size:.86rem;line-height:1.8;
+    font-weight:300;color:rgba(246,242,234,.58);
+  }
+
+  /* TESTIMONIAL */
+  .quote{
+    background:var(--cream);
+    text-align:center;
+  }
+  .quote-inner{max-width:860px;margin:0 auto}
+  .quote-mark{
+    font-family:'Cormorant Garamond',serif;
+    font-size:6rem;color:var(--gold);
+    line-height:.6;margin-bottom:34px;
+  }
+  .quote p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.35rem,2.7vw,1.95rem);
+    font-weight:400;line-height:1.6;
+    color:var(--dark);font-style:italic;
+  }
+  .quote-author{
+    margin-top:40px;font-size:.78rem;
+    letter-spacing:.26em;text-transform:uppercase;
+    color:var(--muted);
+  }
+  .quote-author strong{color:var(--gold);display:block;margin-bottom:6px}
+
+  /* CTA */
+  .cta{
+    position:relative;
+    background:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=85') center/cover fixed;
+    text-align:center;color:#fff;
+    padding:150px 6vw;
+  }
+  .cta::before{
+    content:'';position:absolute;inset:0;
+    background:rgba(20,17,14,.78);
+  }
+  .cta-inner{position:relative;max-width:720px;margin:0 auto}
+  .cta h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2rem,4.6vw,3.4rem);
+    font-weight:400;line-height:1.2;margin-bottom:24px;
+  }
+  .cta p{
+    color:rgba(255,255,255,.78);
+    font-weight:300;line-height:1.9;
+    margin-bottom:44px;font-size:1.02rem;
+  }
+
+  /* CONTACT */
+  .contact{background:var(--cream)}
+  .contact-grid{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:80px;max-width:1200px;margin:0 auto;
+    align-items:start;
+  }
+  .contact-info h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.9rem,3.4vw,2.7rem);
+    font-weight:500;line-height:1.2;margin-bottom:22px;
+  }
+  .contact-info > p{
+    color:var(--muted);line-height:1.9;
+    font-weight:300;margin-bottom:44px;
+  }
+  .info-row{
+    display:flex;gap:20px;align-items:flex-start;
+    margin-bottom:30px;
+  }
+  .info-row .ic{
+    width:44px;height:44px;flex:0 0 44px;
+    border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);font-size:1.05rem;
+  }
+  .info-row h4{
+    font-size:.72rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--muted);
+    margin-bottom:6px;font-weight:500;
+  }
+  .info-row p{font-size:.98rem;color:var(--dark);font-weight:400}
+  form{display:flex;flex-direction:column;gap:18px}
+  .field{position:relative}
+  .field input,.field textarea,.field select{
+    width:100%;padding:17px 20px;
+    background:transparent;
+    border:1px solid rgba(20,17,14,.18);
+    font-family:'Jost',sans-serif;
+    font-size:.94rem;color:var(--dark);
+    transition:border-color .3s;
+    outline:none;
+  }
+  .field textarea{resize:vertical;min-height:130px}
+  .field input:focus,.field textarea:focus,.field select:focus{
+    border-color:var(--gold);
+  }
+  .field input::placeholder,.field textarea::placeholder{color:#a9a193}
+  form .btn{align-self:flex-start;margin-top:8px}
+
+  /* FOOTER */
+  footer{
+    background:var(--dark);color:rgba(246,242,234,.55);
+    padding:80px 6vw 34px;
+  }
+  .foot-top{
+    display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;
+    gap:60px;max-width:1280px;margin:0 auto 60px;
+  }
+  .foot-brand .logo{
+    font-size:1.7rem;color:var(--gold-light);
+    text-shadow:none;margin-bottom:22px;display:block;
+  }
+  .foot-brand p{
+    font-size:.9rem;line-height:1.9;
+    font-weight:300;max-width:320px;
+  }
+  .foot-col h4{
+    color:var(--cream);font-size:.76rem;
+    letter-spacing:.24em;text-transform:uppercase;
+    margin-bottom:24px;font-weight:500;
+  }
+  .foot-col a{
+    display:block;color:rgba(246,242,234,.55);
+    text-decoration:none;font-size:.92rem;
+    font-weight:300;margin-bottom:13px;
+    transition:color .3s;
+  }
+  .foot-col a:hover{color:var(--gold-light)}
+  .socials{display:flex;gap:14px;margin-top:6px}
+  .socials a{
+    width:40px;height:40px;
+    border:1px solid rgba(201,169,97,.35);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold-light);text-decoration:none;
+    font-size:.8rem;transition:all .35s;
+  }
+  .socials a:hover{
+    background:var(--gold);color:var(--dark);
+    border-color:var(--gold);
+  }
+  .foot-bottom{
+    border-top:1px solid rgba(246,242,234,.1);
+    padding-top:30px;text-align:center;
+    max-width:1280px;margin:0 auto;
+    font-size:.8rem;letter-spacing:.08em;
+    font-weight:300;
+  }
+
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    .svc-grid{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr);gap:44px}
+    .steps::before{display:none}
+    .gal-grid{grid-template-columns:repeat(2,1fr)}
+    .gal-wide{grid-column:span 2}
+    .about-grid,.contact-grid{grid-template-columns:1fr;gap:70px}
+    .about-sub{display:none}
+    .foot-top{grid-template-columns:1fr 1fr;gap:44px}
+  }
+  @media(max-width:720px){
+    section{padding:90px 6vw}
+    .nav-links{
+      position:fixed;inset:0;
+      background:rgba(20,17,14,.97);
+      flex-direction:column;justify-content:center;
+      gap:30px;
+      transform:translateX(100%);
+      transition:transform .5s cubic-bezier(.2,.8,.2,1);
+      backdrop-filter:blur(10px);
+    }
+    .nav-links.open{transform:translateX(0)}
+    .nav-links a{font-size:1rem}
+    .burger{display:flex;z-index:110}
+    .burger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px)}
+    .burger.open span:nth-child(2){opacity:0}
+    .burger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px)}
+    .svc-grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .gal-grid{grid-template-columns:1fr;grid-auto-rows:250px}
+    .gal-wide,.gal-tall{grid-column:span 1;grid-row:span 1}
+    .stats{grid-template-columns:1fr;gap:22px;text-align:center}
+    .foot-top{grid-template-columns:1fr;gap:36px}
+    .about-main{height:400px}
+    .cta{background-attachment:scroll}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo">LUMIÈRE</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">Giới thiệu</a>
+    <a href="#services">Dịch vụ</a>
+    <a href="#gallery">Dự án</a>
+    <a href="#process">Quy trình</a>
+    <a href="#contact" class="nav-cta">Liên hệ</a>
+  </div>
+  <div class="burger" id="burger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Nội Thất Cao Cấp · Từ 2010</span>
+    <h1>Kiến Tạo Không Gian<br><em>Sống Đẳng Cấp</em></h1>
+    <p>Mỗi không gian là một tác phẩm — nơi nghệ thuật, tiện nghi và phong cách hòa quyện để tôn lên cá tính riêng của bạn.</p>
+    <div class="btn-group">
+      <a href="#gallery" class="btn btn-gold">Khám Phá Dự Án</a>
+      <a href="#contact" class="btn btn-ghost">Tư Vấn Miễn Phí</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Khám phá</span>
+    <div class="line"></div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-imgs reveal">
+      <img class="about-main" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=85" alt="Không gian nội thất sang trọng">
+      <img class="about-sub" src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=700&q=85" alt="Chi tiết nội thất">
+    </div>
+    <div class="about-text reveal">
+      <div class="eyebrow">Về Lumière</div>
+      <h2>Nơi Đẳng Cấp Được<br>Kiến Tạo Từ Chi Tiết</h2>
+      <p>Trong hơn một thập kỷ, Lumière đã đồng hành cùng hàng trăm gia chủ và thương hiệu cao cấp, kiến tạo nên những không gian sống và làm việc mang dấu ấn riêng biệt.</p>
+      <p>Chúng tôi tin rằng sự sang trọng thực sự không nằm ở sự phô trương, mà ở sự tinh tế trong từng đường nét, chất liệu và ánh sáng — nơi mỗi chi tiết đều kể một câu chuyện.</p>
+      <div class="stats">
+        <div class="stat">
+          <h3>15+</h3>
+          <span>Năm kinh nghiệm</span>
+        </div>
+        <div class="stat">
+          <h3>480</h3>
+          <span>Dự án hoàn thành</span>
+        </div>
+        <div class="stat">
+          <h3>98%</h3>
+          <span>Khách hàng hài lòng</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-head reveal">
+    <div class="eyebrow">Dịch Vụ Của Chúng Tôi</div>
+    <h2>Trọn Vẹn Hành Trình<br>Từ Ý Tưởng Đến Hiện Thực</h2>
+    <p>Mỗi dịch vụ được thiết kế riêng biệt, đảm bảo sự hoàn hảo trong từng giai đoạn của dự án.</p>
+  </div>
+  <div class="svc-grid reveal">
+    <div class="svc">
+      <div class="svc-num">01</div>
+      <div class="svc-icon">◈</div>
+      <h3>Thiết Kế Kiến Trúc</h3>
+      <p>Quy hoạch không gian thông minh, tối ưu công năng và thẩm mỹ cho mọi diện tích.</p>
+    </div>
+    <div class="svc">
+      <div class="svc-num">02</div>
+      <div class="svc-icon">◈</div>
+      <h3>Nội Thất Cao Cấp</h3>
+      <p>Sản xuất và lắp đặt nội thất bespoke từ gỗ tự nhiên, đá quý và vật liệu nhập khẩu.</p>
+    </div>
+    <div class="svc">
+      <div class="svc-num">03</div>
+      <div class="svc-icon">◈</div>
+      <h3>Tư Vấn Phong Cách</h3>
+      <p>Định hình phong cách sống, lựa chọn vật liệu và bảng màu phù hợp cá tính riêng.</p>
+    </div>
+    <div class="svc">
+      <div class="svc-num">04</div>
+      <div class="svc-icon">◈</div>
+      <h3>Thi Công Trọn Gói</h3>
+      <p>Quản lý dự án toàn diện, giám sát chất lượng và bàn giao đúng tiến độ cam kết.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-head reveal">
+    <div class="eyebrow">Dự Án Tiêu Biểu</div>
+    <h2>Bộ Sưu Tập Không Gian</h2>
+    <p>Những công trình được tuyển chọn, thể hiện triết lý thiết kế tinh tế của Lumière.</p>
+  </div>
+  <div class="gal-grid">
+    <div class="gal-item gal-tall reveal">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=85" alt="Phòng khách">
+      <div class="gal-cap"><span>Biệt thự</span><strong>Villa Ánh Sáng</strong></div>
+    </div>
+    <div class="gal-item reveal">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=85" alt="Phòng bếp">
+      <div class="gal-cap"><span>Nhà phố</span><strong>Bếp Đương Đại</strong></div>
+    </div>
+    <div class="gal-item reveal">
+      <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=85" alt="Phòng ngủ">
+      <div class="gal-cap"><span>Căn hộ</span><strong>Suite Hoàng Gia</strong></div>
+    </div>
+    <div class="gal-item gal-wide reveal">
+      <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1200&q=85" alt="Phòng khách lớn">
+      <div class="gal-cap"><span>Penthouse</span><strong>Sky Living</strong></div>
+    </div>
+    <div class="gal-item reveal">
+      <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=800&q=85" alt="Phòng tắm">
+      <div class="gal-cap"><span>Spa</span><strong>Marble Retreat</strong></div>
+    </div>
+    <div class="gal-item reveal">
+      <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=800&q=85" alt="Góc đọc sách">
+      <div class="gal-cap"><span>Thư viện</span><strong>Library Suite</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-head reveal">
+    <div class="eyebrow">Quy Trình Làm Việc</div>
+    <h2>Bốn Bước Đến<br>Sự Hoàn Hảo</h2>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <h3>Tư Vấn</h3>
+      <p>Lắng nghe nhu cầu, khảo sát hiện trạng và thấu hiểu phong cách sống của bạn.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02</div>
+      <h3>Thiết Kế</h3>
+      <p>Phác thảo ý tưởng, dựng hình 3D và hoàn thiện bản vẽ chi tiết đến từng milimét.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <h3>Thi Công</h3>
+      <p>Thi công chính xác, giám sát chất lượng nghiêm ngặt từ vật liệu đến tay nghề.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">04</div>
+      <h3>Bàn Giao</h3>
+      <p>Nghiệm thu kỹ lưỡng, vệ sinh hoàn thiện và trao tay không gian sống trọn vẹn.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="quote">
+  <div class="quote-inner reveal">
+    <div class="quote-mark">"</div>
+    <p>Lumière không chỉ thiết kế nội thất — họ đã kiến tạo nên một mái ấm mà mỗi ngày tôi trở về đều cảm thấy bình yên và tự hào.</p>
+    <div class="quote-author">
+      <strong>Bà Nguyễn Thanh Hà</strong>
+      Chủ nhân Villa Thảo Điền, TP.HCM
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-inner reveal">
+    <h2>Bắt Đầu Hành Trình<br>Của Bạn Hôm Nay</h2>
+    <p>Đặt lịch tư vấn miễn phí cùng đội ngũ kiến trúc sư của Lumière và khám phá tiềm năng không gian của bạn.</p>
+    <a href="#contact" class="btn btn-gold">Đặt Lịch Tư Vấn</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="eyebrow">Kết Nối Với Chúng Tôi</div>
+      <h2>Hãy Để Chúng Tôi<br>Hiện Thực Hóa Ước Mơ</h2>
+      <p>Đội ngũ của Lumière luôn sẵn sàng lắng nghe và tư vấn tận tâm cho dự án của bạn.</p>
+
+      <div class="info-row">
+        <div class="ic">✆</div>
+        <div>
+          <h4>Hotline</h4>
+          <p>+84 28 3822 8899</p>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="ic">✉</div>
+        <div>
+          <h4>Email</h4>
+          <p>hello@lumiere.vn</p>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="ic">⌖</div>
+        <div>
+          <h4>Showroom</h4>
+          <p>128 Nguyễn Văn Trỗi, Q. Phú Nhuận, TP.HCM</p>
+        </div>
+      </div>
+    </div>
+
+    <form class="reveal" onsubmit="event.preventDefault();this.innerHTML='<p style=\'font-family:Cormorant Garamond,serif;font-size:1.4rem;color:#c9a961;text-align:center;padding:60px 0\'>Cảm ơn bạn! Chúng tôi sẽ liên hệ trong 24h tới.</p>';">
+      <div class="field"><input type="text" placeholder="Họ và tên của bạn" required></div>
+      <div class="field"><input type="tel" placeholder="Số điện thoại" required></div>
+      <div class="field"><input type="email" placeholder="Email"></div>
+      <div class="field">
+        <select required>
+          <option value="">Chọn loại dịch vụ</option>
+          <option>Thiết kế nội thất biệt thự</option>
+          <option>Thiết kế căn hộ cao cấp</option>
+          <option>Thi công trọn gói</option>
+          <option>Tư vấn phong cách</option>
+        </select>
+      </div>
+      <div class="field"><textarea placeholder="Mô tả ngắn về dự án của bạn..."></textarea></div>
+      <button type="submit" class="btn btn-gold">Gửi Yêu Cầu</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <span class="logo">LUMIÈRE</span>
+      <p>Kiến tạo không gian sống đẳng cấp với triết lý tinh tế trong từng chi tiết. Đồng hành cùng bạn từ ý tưởng đến hiện thực.</p>
+      <div class="socials" style="margin-top:26px">
+        <a href="#">f</a>
+        <a href="#">in</a>
+        <a href="#">ig</a>
+        <a href="#">pi</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Dịch Vụ</h4>
+      <a href="#">Thiết kế kiến trúc</a>
+      <a href="#">Nội thất cao cấp</a>
+      <a href="#">Tư vấn phong cách</a>
+      <a href="#">Thi công trọn gói</a>
+    </div>
+    <div class="foot-col">
+      <h4>Về Chúng Tôi</h4>
+      <a href="#">Câu chuyện</a>
+      <a href="#">Đội ngũ</a>
+      <a href="#">Dự án</a>
+      <a href="#">Tuyển dụng</a>
+    </div>
+    <div class="foot-col">
+      <h4>Liên Hệ</h4>
+      <a href="#">+84 28 3822 8899</a>
+      <a href="#">hello@lumiere.vn</a>
+      <a href="#">128 Nguyễn Văn Trỗi<br>Q. Phú Nhuận, TP.HCM</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    © 2026 LUMIÈRE INTERIOR. Bảo lưu mọi quyền.
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
